@@ -4,3 +4,11 @@ html
 		title Welcome
 	body
 		h1 Homepage
+
+		- if (req.session)
+			p #{req.session}
+			p OK
+		- else
+			p LOGIN
+		
+		p asd

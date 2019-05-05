@@ -1,5 +1,6 @@
 module admin.admin;
 
+import std.stdio : writeln;
 import vibe.vibe;
 
 @path("tchoutchou")
@@ -9,6 +10,7 @@ class Admin
 	@path("post")
 	void post()
 	{
+        writeln("test post");
 		render!"admin/post.dt";
 	}
 

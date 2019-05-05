@@ -1,0 +1,16 @@
+doctype html
+html
+	head
+		title Welcome to Take a Train
+	body
+		h1 Welcome to Take a Train
+		p Please use your login information
+
+		form(action="/secure/login_check", method="POST")
+			p
+				label(for="username") username
+				input#username(type="text", name="username", autofocus=true)
+			p
+				label(for="password") password
+				input#password(type="password", name="password")
+			button(type="submit") Enter

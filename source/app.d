@@ -7,9 +7,9 @@ import user.secure;
 void main()
 {
 	auto router = new URLRouter;
+	router.registerWebInterface(new Secure);
 	router.registerWebInterface(new Home);
 	router.registerWebInterface(new Admin);
-	router.registerWebInterface(new Secure);
 	router.get("*", serveStaticFiles("public/"));
 
 	auto settings = new HTTPServerSettings;
