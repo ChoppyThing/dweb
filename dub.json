@@ -4,6 +4,8 @@
 	],
 	"copyright": "Copyright © 2019, Choppy",
 	"dependencies": {
+		"dauth": "~>0.6.4",
+		"hunt-database": "~>1.2.0",
 		"vibe-d": "~>0.8.2"
 	},
 	"description": "A simple vibe.d server application.",

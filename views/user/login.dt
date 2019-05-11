@@ -1,16 +1,16 @@
-doctype html
-html
-	head
-		title Welcome to Take a Train
-	body
-		h1 Welcome to Take a Train
-		p Please use your login information
+extends admin/layout
 
-		form(action="/secure/login_check", method="POST")
-			p
-				label(for="username") username
-				input#username(type="text", name="username", autofocus=true)
-			p
-				label(for="password") password
-				input#password(type="password", name="password")
-			button(type="submit") Enter
+block body
+	div#login
+		div.ui.two.column.centered.grid
+			div.column.login-form
+				h1 Welcome to Take a Train
+
+				form.ui.form(action="/secure/login/check", method="POST")
+					div.field
+						label(for="username") Pseudo
+						input#username(type="text", name="username", autofocus=true)
+					div.field
+						label(for="password") Mot de passe
+						input#password(type="password", name="password")
+					button.ui.button.basic.blue(type="submit") Enter

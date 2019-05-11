@@ -1,0 +1,19 @@
+- void css(string file)
+	link(rel= 'stylesheet', type='text/css', href='#{file}')
+- void script(string file)
+	script(type='text/javascript', src='#{file}')
+
+
+doctype 5
+html
+	head
+		title Take a train
+		- css("/lib/semantic/semantic.min.css");
+		- css("/lib/semantic/yeti.theme.css");
+		- css("/admin.css");
+		- script("/lib/semantic/semantic.min.js");
+	body#admin
+		div.ui.two.column.centered.grid.stacked.doubling
+			div.column
+				include admin/menu
+				block body

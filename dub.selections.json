@@ -3,8 +3,12 @@
 	"versions": {
 		"botan": "1.12.10",
 		"botan-math": "1.0.3",
+		"dauth": "0.6.4",
 		"diet-ng": "1.5.0",
 		"eventcore": "0.8.42",
+		"hunt": "1.2.0",
+		"hunt-database": "1.2.0",
+		"hunt-sql": "1.1.1",
 		"libasync": "0.8.4",
 		"libevent": "2.0.2+2.0.16",
 		"memutils": "0.4.13",

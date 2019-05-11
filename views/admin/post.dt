@@ -1,6 +1,25 @@
-doctype 5
-html
-	head
-		title Welcome
-	body
-		h1 Post
+extends admin/layout
+
+block body
+	h1 Post
+	p Hello, admin!
+	a.ui.button.basic.teal(href="/tchoutchou/post/add") Ajouter un poste
+
+	table.ui.celled.table
+		thead
+			tr
+				th Titre
+				th Date de création
+				th Action
+		
+		tbody
+		- foreach (note; posts)
+			tr
+				td
+					|=note.title
+				td
+					|=note.created_at
+				td
+
+					a.ui.button.basic.pink(href="/tchoutchou/post/edit?id="~note.id)
+						i.edit.outline.icon

@@ -1,6 +1,5 @@
-doctype 5
-html
-	head
-		title Welcome
-	body
-		h1 Dashboard
+extends admin/layout
+
+block body
+	h1 Dashboard
+	p Hello, admin!

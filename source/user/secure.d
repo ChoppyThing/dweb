@@ -2,6 +2,10 @@ module user.secure;
 
 import vibe.vibe;
 import std.stdio : writeln;
+import user.authInfo;
+
+import hunt.database;
+import dauth;
 
 @path("secure")
 class Secure
@@ -10,28 +14,29 @@ class Secure
     @path("login")
     void login(HTTPServerRequest req, HTTPServerResponse res)
     {
-writeln(res);
+
         render!"user/login.dt";
     }
 
 	@method(HTTPMethod.POST)
-    @path("login_check")
+    @path("login/check")
     void loginCheck(HTTPServerRequest req, HTTPServerResponse res)
     {
-        enforceHTTP("username" in req.form && "password" in req.form,
-            HTTPStatus.badRequest, "Missing username/password field.");
+        if (check(req.form["username"], req.form["password"])) {
+            writeln("Correct");
 
-        // todo: verify user/password here
-        if (req.form["username"] == "choppy" && req.form["password"] == "test") {
-            writeln("right");
+            if (!req.session) {
+                req.session = res.startSession();
+            }
+
+            AuthInfo auth;
+            auth.username = req.form["username"];
+            req.session.set("auth", auth);
+
+            res.redirect("/tchoutchou/post");
         } else {
             res.redirect("/secure/login");
         }
-writeln(req.form);
-        auto session = res.startSession();
-        session.set("username", req.form["username"]);
-        session.set("password", req.form["password"]);
-        res.redirect("/");
     }
 
     /*@path("logout")
@@ -43,5 +48,25 @@ writeln(req.form);
 /*
         res.redirect("/");
     }*/
-}
 
+    private:
+    bool check(string login, string password)
+    {
+        auto db = new Database("mysql://root:test@localhost:3306/train?charset=utf8mb4");
+
+        string sql = "SELECT * FROM user WHERE username ='" ~ login ~ "' LIMIT 1";
+
+        char[] input = cast(char[])password;
+        Password pass = toPassword(input);
+        // writeln(makeHash(pass).toCryptString());
+
+		foreach(row; db.query(sql))
+		{
+    		db.close();
+            return isSameHash(pass, parseHash(row["password"]));
+		}
+
+		db.close();
+        return false;
+    }
+}

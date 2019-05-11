@@ -1,0 +1,17 @@
+extends admin/layout
+
+block body
+	h1 Ajouter un poste
+
+	form.ui.form(action="/tchoutchou/post/add", method="POST")
+		div.field
+			label(for="title") Titre
+			input#title(type="text", name="title", autofocus=true)
+		div.field
+			label(for="note") Note 
+			textarea#note(name="note")
+		button.ui.button.basic.blue(type="submit") Enter
+
+	- script("/lib/ckeditor/ckeditor.js");
+
+	div!= "<script>CKEDITOR.replace('note');</script>"
