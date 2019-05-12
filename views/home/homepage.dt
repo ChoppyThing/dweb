@@ -1,14 +1,19 @@
-doctype 5
-html
-	head
-		title Welcome
-	body
-		h1 Homepage
+extends home/layout
 
-		- if (req.session)
-			p #{req.session}
-			p OK
-		- else
-			p LOGIN
-		
-		p asd
+block body
+	header
+		img.header(src="/img/title.png")
+	div#banner
+		img(src="/img/cropped-DSC_0043-2.jpg")
+	div#content
+		div.ui.grid
+			div.twelve.wide.column.blog
+				- foreach (note; posts)
+					h1
+						|= note.title
+					p !{note.note}
+				h1 Le journal d'un Choppy
+				p asd
+			div.four.wide.column.infos.me
+				p Des choses et d'autres.
+				p Des photos, des images, des dessins peut-être !

@@ -1,0 +1,27 @@
+#home {
+}
+
+#home header {
+    text-align: center;
+    padding: 25px;
+}
+#home header img {
+    width: 40%;
+}
+
+#home #banner img {
+    width: 100%;
+}
+
+#home #content {
+    padding: 60px 10%;
+    font-family: 'Lora', serif;
+    font-size: 20px;
+}
+#home #content h1 {
+    font-family: 'Lora', serif;
+}
+#home #content div.me {
+    font-size: 15px;
+    text-align: justify;
+}

@@ -1,0 +1,14 @@
+- void css(string file)
+	link(rel= 'stylesheet', type='text/css', href='#{file}')
+- void script(string file)
+	script(type='text/javascript', src='#{file}')
+
+doctype 5
+html
+	head
+		title Le Journal d'un Choppy
+		- css("/lib/semantic/semantic.min.css");
+		- css("//fonts.googleapis.com/css?family=Lora%3A400%2C400italic%2C700%2C700italic%7CMontserrat%3A400%2C700%7CMaven+Pro%3A400%2C700&#038;ver=5.1.1");
+		- css("/takoyaki.css");
+	body#home
+		block body
