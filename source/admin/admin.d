@@ -6,9 +6,7 @@ import vibe.web.auth;
 import user.authInfo;
 
 import hunt.database;
-
 import database.database;
-
 
 @requiresAuth
 @path("tchoutchou")
@@ -40,10 +38,11 @@ class Admin
 	@auth(Role.admin)
 	@method(HTTPMethod.GET)
 	@path("post")
-	void post()
+	void post(int page = 1)
 	{
-		auto posts = this.database.getPosts();
-		render!("admin/post.dt", posts);
+		auto posts = this.database.getPosts(page);
+		auto postCount = this.database.getPostCount();
+		render!("admin/post.dt", posts, postCount, page);
 	}
 
 	@system

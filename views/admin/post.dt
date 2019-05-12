@@ -22,3 +22,9 @@ block body
 				td
 					a.ui.button.basic.pink(href="/tchoutchou/post/edit?id="~note.id)
 						i.edit.outline.icon
+
+	- import std.conv;
+	- if (page > 1)
+		a.ui.button.basic.orange(href="/tchoutchou/post?page=" ~ to!string(page -  1)) <
+	- if (page < (to!int(postCount) / 5))
+		a.ui.button.basic.orange(href="/tchoutchou/post?page=" ~ to!string(page +  1)) >

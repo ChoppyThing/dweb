@@ -5,6 +5,7 @@ import hunt.database;
 class DatabaseConnection
 {
     string connection;
+    int perPage = 5;
 
     this()
     {
@@ -12,13 +13,26 @@ class DatabaseConnection
     }
 
     public:
-        auto getPosts()
+        auto getPostCount()
+        {
+            auto db = new Database(this.connection);
+            Statement stmt = db.prepare("SELECT COUNT(*) AS number FROM post");
+
+            return stmt.fetch()["number"];
+        }
+
+        auto getPosts(int page = 1)
         {
             auto db = new Database(this.connection);
 
-            string sql = "SELECT * FROM post LIMIT 10";
+            int offset = (page - 1) * this.perPage;
 
-            return db.query(sql);
+            string sql = "SELECT * FROM post LIMIT 10";
+            Statement stmt = db.prepare("SELECT * FROM post LIMIT :limit OFFSET :offset");
+            stmt.setParameter("limit", this.perPage);
+            stmt.setParameter("offset", offset);
+
+            return stmt.query();
         }
 
         auto getPost(int id)
