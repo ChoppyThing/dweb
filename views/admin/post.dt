@@ -20,6 +20,5 @@ block body
 				td
 					|=note.created_at
 				td
-
 					a.ui.button.basic.pink(href="/tchoutchou/post/edit?id="~note.id)
 						i.edit.outline.icon

@@ -1,0 +1,24 @@
+extends admin/layout
+
+block body
+	h1 Categorie
+	p Hello, admin!
+	a.ui.button.basic.teal(href="/tchoutchou/category/add") Ajouter une catégorie
+
+	table.ui.celled.table
+		thead
+			tr
+				th Nom
+				th Date de création
+				th Action
+		
+		tbody
+		- foreach (category; categories)
+			tr
+				td
+					|=category.name
+				td
+					|=category.created_at
+				td
+					a.ui.button.basic.pink(href="/tchoutchou/category/edit?id="~category.id)
+						i.edit.outline.icon

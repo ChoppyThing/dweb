@@ -11,6 +11,7 @@ html
 		- css("/lib/semantic/semantic.min.css");
 		- css("/lib/semantic/yeti.theme.css");
 		- css("/admin.css");
+		- script("/lib/jquery.js");
 		- script("/lib/semantic/semantic.min.js");
 	body#admin
 		div.ui.two.column.centered.grid.stacked.doubling

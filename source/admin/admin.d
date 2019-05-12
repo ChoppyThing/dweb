@@ -33,6 +33,9 @@ class Admin
 		return req.session.get!AuthInfo("auth");
 	}
 
+	/**
+	 * Post
+	 */
 	@system
 	@auth(Role.admin)
 	@method(HTTPMethod.GET)
@@ -83,11 +86,46 @@ class Admin
 		res.redirect("/tchoutchou/post");
 	}
 
+	/**
+	 * Dashboard
+	 */
 	@auth(Role.admin)
 	@method(HTTPMethod.GET)
 	@path("dashboard")
 	void dashboard()
 	{
 		render!"admin/dashboard.dt";
+	}
+
+	/**
+	 *	Category
+	 */
+	@system
+	@auth(Role.admin)
+	@method(HTTPMethod.GET)
+	@path("category")
+	void category()
+	{
+		auto categories = this.database.getCategories();
+		render!("admin/category.dt", categories);
+	}
+
+	@auth(Role.admin)
+	@method(HTTPMethod.GET)
+	@path("category/add")
+	void addCategory()
+	{
+		render!"admin/addCategory.dt";
+	}
+
+	@system
+	@auth(Role.admin)
+	@method(HTTPMethod.POST)
+	@path("category/add")
+	void addCategory(scope HTTPServerRequest req, scope HTTPServerResponse res)
+	{
+		this.database.saveCategory(req.form["name"], req.form["slug"]);
+
+		res.redirect("/tchoutchou/category");
 	}
 }

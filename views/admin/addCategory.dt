@@ -1,0 +1,15 @@
+extends admin/layout
+
+block body
+	h1 Ajouter une catégorie
+
+	form.ui.form(action="/tchoutchou/category/add", method="POST")
+		div.field
+			label(for="name") Nom
+			input#name(type="text", name="name", autofocus=true)
+		div.field
+			label(for="slug") Slug
+			input#slug(type="text", name="slug")
+
+		button.ui.button.basic.blue(type="submit") Enter
+

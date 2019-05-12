@@ -57,4 +57,29 @@ class DatabaseConnection
 
             db.close();
         }
+
+        /**
+         *  Category
+         */
+        auto getCategories()
+        {
+            auto db = new Database(this.connection);
+
+            string sql = "SELECT * FROM category LIMIT 10";
+
+            return db.query(sql);
+        }
+
+        void saveCategory(string name, string slug)
+        {
+            auto db = new Database(this.connection);
+
+            Statement stmt = db.prepare("INSERT INTO category(name, slug) VALUES(:name, :slug)");
+            stmt.setParameter("name", name);
+            stmt.setParameter("slug", slug);
+
+            stmt.execute();
+
+            db.close();
+        }
 }
