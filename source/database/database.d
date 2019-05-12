@@ -31,24 +31,28 @@ class DatabaseConnection
             return stmt.fetch();
         }
 
-        void savePost(string title, string note)
+        void savePost(string title, string note, string category)
         {
             auto db = new Database(this.connection);
 
-            Statement stmt = db.prepare("INSERT INTO post(title, note) VALUES(:title, :note)");
+            Statement stmt = db.prepare("INSERT INTO post(title, note, category_id) 
+                VALUES(:title, :note, :category_id)");
             stmt.setParameter("title", title);
             stmt.setParameter("note", note);
+            stmt.setParameter("category_id", category);
 
             stmt.execute();
 
             db.close();
         }
 
-        void savePost(int id, string title, string note)
+        void savePost(int id, string title, string note, string category)
         {
             auto db = new Database(this.connection);
 
-            Statement stmt = db.prepare("UPDATE post SET title = :title, note = :note WHERE id = :id");
+            Statement stmt = db.prepare("UPDATE post SET title = :title, note = :note, category_id = :category_id
+                WHERE id = :id");
+            stmt.setParameter("category_id", category);
             stmt.setParameter("title", title);
             stmt.setParameter("note", note);
             stmt.setParameter("id", id);

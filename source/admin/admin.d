@@ -46,12 +46,14 @@ class Admin
 		render!("admin/post.dt", posts);
 	}
 
+	@system
 	@auth(Role.admin)
 	@method(HTTPMethod.GET)
 	@path("post/add")
 	void addPost()
 	{
-		render!"admin/addPost.dt";
+		auto categories = this.database.getCategories();
+		render!("admin/addPost.dt", categories);
 	}
 
 	@system
@@ -60,7 +62,7 @@ class Admin
 	@path("post/add")
 	void createPost(scope HTTPServerRequest req, scope HTTPServerResponse res)
 	{
-		this.database.savePost(req.form["title"], req.form["note"]);
+		this.database.savePost(req.form["title"], req.form["note"], req.form["category"]);
 
 		res.redirect("/tchoutchou/post");
 	}
@@ -71,8 +73,9 @@ class Admin
 	@path("post/edit")
 	void editPost(int id, scope HTTPServerRequest req, scope HTTPServerResponse res)
 	{
+		auto categories = this.database.getCategories();
 		auto post = this.database.getPost(id);
-		render!("admin/editPost.dt", post);
+		render!("admin/editPost.dt", post, categories);
 	}
 
 	@system
@@ -81,7 +84,7 @@ class Admin
 	@path("post/edit")
 	void createditPostePost(int id, scope HTTPServerRequest req, scope HTTPServerResponse res)
 	{
-		this.database.savePost(id, req.form["title"], req.form["note"]);
+		this.database.savePost(id, req.form["title"], req.form["note"], req.form["category"]);
 
 		res.redirect("/tchoutchou/post");
 	}

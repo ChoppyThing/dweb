@@ -11,6 +11,17 @@ block body
 			- import std.string;
 			label(for="note") Note 
 			textarea#note(name="note")!= post.note
+		div.field
+			label(for="category") Catégorie
+			select.ui.fluid.dropdown(name="category")
+				option(value="") -- Choisir --
+				- foreach (category; categories)
+					- if (category.id == post.category_id)
+						option(value=category.id, selected="selected")
+							|= category.name
+					- else 
+						option(value=category.id)
+							|= category.name
 		button.ui.button.basic.blue(type="submit") Enter
 
 	- script("/lib/ckeditor/ckeditor.js");

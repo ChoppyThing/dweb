@@ -10,6 +10,13 @@ block body
 		div.field
 			label(for="note") Note 
 			textarea#note(name="note")
+		div.field
+			label(for="category") Catégorie
+			select.ui.fluid.dropdown(name="category")
+				option(value="") -- Choisir --
+				- foreach (category; categories)
+					option(value=category.id)
+						|= category.name
 		button.ui.button.basic.blue(type="submit") Enter
 
 	- script("/lib/ckeditor/ckeditor.js");
