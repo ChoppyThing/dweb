@@ -11,7 +11,7 @@ block body
 				- foreach (note; posts)
 					h1
 						|= note.title
-					p !{note.note}
+					div !{note.note}
 				h1 Le journal d'un Choppy
 				p asd
 			div.four.wide.column.infos.me

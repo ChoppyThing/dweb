@@ -25,3 +25,6 @@
     font-size: 15px;
     text-align: justify;
 }
+#home #content .wide.column img {
+    width: 100%;
+}
