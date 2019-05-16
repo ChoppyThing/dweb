@@ -1,0 +1,5 @@
+msgid "Welcome"
+msgstr "Welcome"
+
+msgid "home.welcome-text"
+msgstr "Hello, this is a translation example."

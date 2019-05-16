@@ -49,7 +49,7 @@ class DatabaseConnection
         {
             auto db = new Database(this.connection);
 
-            Statement stmt = db.prepare("INSERT INTO post(title, note, category_id) 
+            Statement stmt = db.prepare("INSERT INTO post(title, note, category_id)
                 VALUES(:title, :note, :category_id)");
             stmt.setParameter("title", title);
             stmt.setParameter("note", note);

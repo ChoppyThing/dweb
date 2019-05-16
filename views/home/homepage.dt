@@ -6,6 +6,7 @@ block body
 	div#banner
 		img(src="/img/cropped-DSC_0043-2.jpg")
 	div#content
+		div& home.welcome-text
 		div.ui.grid
 			div.twelve.wide.column.blog
 				- foreach (note; posts)
@@ -17,3 +18,5 @@ block body
 			div.four.wide.column.infos.me
 				p Des choses et d'autres.
 				p Des photos, des images, des dessins peut-être !
+
+		include utils/localization

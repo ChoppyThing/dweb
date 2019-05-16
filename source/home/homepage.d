@@ -2,7 +2,10 @@ module home.homepage;
 
 import vibe.vibe;
 import database.database;
+import utils.translation;
+import utils.translation;
 
+@translationContext!TranslationContext
 @path("/")
 class Home
 {

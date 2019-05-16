@@ -1,0 +1,5 @@
+div.ui.small.basic.icon.buttons
+	a.ui.button(href="/language/fr_FR")
+		i.france.flag
+	a.ui.button(href="/language/en_US")
+		i.united.kingdom.flag

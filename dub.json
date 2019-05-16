@@ -10,5 +10,9 @@
 	},
 	"description": "A simple vibe.d server application.",
 	"license": "proprietary",
-	"name": "train"
+	"name": "train",
+	"stringImportPaths": [
+		"views",
+		"translations"
+	]
 }
