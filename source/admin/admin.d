@@ -5,19 +5,19 @@ import vibe.vibe;
 import vibe.web.auth;
 import user.authInfo;
 
-import hunt.database;
-import database.database;
+import database.post;
+import database.category;
 
 @requiresAuth
 @path("tchoutchou")
 class Admin
 {
-	DatabaseConnection database;
+	PostConnection postConnection;
 
 	this()
 	{
-		if (!this.database) {
-			this.database = new DatabaseConnection();
+		if (!this.postConnection) {
+			this.postConnection = new PostConnection();
 		}
 	}
 
@@ -40,8 +40,8 @@ class Admin
 	@path("post")
 	void post(int page = 1)
 	{
-		auto posts = this.database.getPosts(page);
-		auto postCount = this.database.getPostCount();
+		auto posts = this.postConnection.getPosts(page);
+		auto postCount = this.postConnection.getPostCount();
 		render!("admin/post.dt", posts, postCount, page);
 	}
 
@@ -51,7 +51,8 @@ class Admin
 	@path("post/add")
 	void addPost()
 	{
-		auto categories = this.database.getCategories();
+		auto categoryConnection = new CategoryConnection();
+		auto categories = categoryConnection.getCategories();
 		render!("admin/addPost.dt", categories);
 	}
 
@@ -61,7 +62,7 @@ class Admin
 	@path("post/add")
 	void createPost(scope HTTPServerRequest req, scope HTTPServerResponse res)
 	{
-		this.database.savePost(req.form["title"], req.form["note"], req.form["category"]);
+		this.postConnection.savePost(req.form["title"], req.form["note"], req.form["category"]);
 
 		res.redirect("/tchoutchou/post");
 	}
@@ -72,8 +73,9 @@ class Admin
 	@path("post/edit")
 	void editPost(int id, scope HTTPServerRequest req, scope HTTPServerResponse res)
 	{
-		auto categories = this.database.getCategories();
-		auto post = this.database.getPost(id);
+		auto categoryConnection = new CategoryConnection();
+		auto categories = categoryConnection.getCategories();
+		auto post = this.postConnection.getPost(id);
 		render!("admin/editPost.dt", post, categories);
 	}
 
@@ -83,7 +85,7 @@ class Admin
 	@path("post/edit")
 	void createditPostePost(int id, scope HTTPServerRequest req, scope HTTPServerResponse res)
 	{
-		this.database.savePost(id, req.form["title"], req.form["note"], req.form["category"]);
+		this.postConnection.savePost(id, req.form["title"], req.form["note"], req.form["category"]);
 
 		res.redirect("/tchoutchou/post");
 	}
@@ -108,7 +110,8 @@ class Admin
 	@path("category")
 	void category()
 	{
-		auto categories = this.database.getCategories();
+		auto categoryConnection = new CategoryConnection();
+		auto categories = categoryConnection.getCategories();
 		render!("admin/category.dt", categories);
 	}
 
@@ -126,7 +129,8 @@ class Admin
 	@path("category/add")
 	void addCategory(scope HTTPServerRequest req, scope HTTPServerResponse res)
 	{
-		this.database.saveCategory(req.form["name"], req.form["slug"]);
+		auto categoryConnection = new CategoryConnection();
+		categoryConnection.saveCategory(req.form["name"], req.form["slug"]);
 
 		res.redirect("/tchoutchou/category");
 	}

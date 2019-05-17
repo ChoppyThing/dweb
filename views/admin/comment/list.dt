@@ -1,0 +1,32 @@
+extends admin/layout
+
+block body
+	h1 Commentaires
+	p Hello, admin!
+
+	table.ui.celled.table
+		thead
+			tr
+				th Nom
+				th E-mail
+				th Commentaire
+				th Date de création
+				th Poste
+				th Action
+		
+		tbody
+		- foreach (comment; comments)
+			tr
+				td
+					|=comment.username
+				td
+					|=comment.email
+				td
+					|=comment.text
+				td
+					|=comment.created_at
+				td
+					|=comment.post_id
+				td
+					a.ui.button.basic.pink(href="/tchoutchou/comment/edit?id="~comment.id)
+						i.edit.outline.icon

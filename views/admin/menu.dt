@@ -2,4 +2,5 @@ div.ui.secondary.menu
     a.item(href="/") Accueil
     a.item(href="/tchoutchou/dashboard") Dashboard
     a.item(href="/tchoutchou/post") Poste
+    a.item(href="/tchoutchou/comment") Comment
     a.item(href="/tchoutchou/category") Categorie

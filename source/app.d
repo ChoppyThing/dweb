@@ -2,6 +2,7 @@ import std.stdio : writeln;
 import vibe.vibe;
 import home.homepage;
 import admin.admin;
+import admin.comment;
 import user.authInfo;
 import user.secure;
 import utils.localization;
@@ -13,6 +14,7 @@ void main()
 	router.registerWebInterface(new Home);
 	router.registerWebInterface(new Admin);
 	router.registerWebInterface(new Secure);
+	router.registerWebInterface(new Comment);
 	router.registerWebInterface(new Localization);
 	router.get("*", serveStaticFiles("public/"));
 

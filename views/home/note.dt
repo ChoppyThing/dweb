@@ -2,19 +2,24 @@ extends home/layout
 
 block body
 	header
-		img.header(src="/img/title.png")
+		img.header(src="/img/_title.png")
 	div#banner
-		img(src="/img/cropped-DSC_0043-2.jpg")
+		img(src="/img/_cropped-DSC_0043-2.jpg")
 	div#content
 		div& home.welcome-text
 		div.ui.grid
 			div.twelve.wide.column.blog
-				- foreach (note; posts)
-					h1
-						|= note.title
-					div !{note.note}
-				h1 Le journal d'un Choppy
-				p asdqsd
+				h1
+					|= post.title
+				div !{post.note}
+
+				ul
+					- foreach (comment; comments)
+						li
+							|= comment.username
+							|= comment.text
+
+
 			div.four.wide.column.infos.me
 				p Des choses et d'autres.
 				p Des photos, des images, des dessins peut-être !
